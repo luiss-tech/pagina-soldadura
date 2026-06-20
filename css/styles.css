@@ -298,54 +298,45 @@ section {
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
 }
 
-/* Contact */
-.contact {
-  background: linear-gradient(180deg, rgba(255, 204, 0, 0.08), transparent 60%), var(--bg);
-}
-
-.contact-info {
-  max-width: 1100px;
-  margin: 2rem auto 1.5rem;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-}
-
-.contact-info div {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-}
-
-.contact-info h3 {
-  margin: 0 0 0.75rem;
-}
-
-.contact-info p {
-  margin: 0;
-  color: var(--muted);
-}
-
-.whatsapp-button {
+/* Floating WhatsApp button */
+.floating-whatsapp-button {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  padding: 1rem 1.75rem;
-  border-radius: 999px;
+  width: 4rem;
+  height: 4rem;
+  padding: 0.35rem;
+  border-radius: 50%;
   background: #25d366;
   color: #111;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  box-shadow: 0 18px 35px rgba(37, 211, 102, 0.18);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 18px 40px rgba(37, 211, 102, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  z-index: 50;
+  overflow: visible;
 }
 
-.whatsapp-button:hover,
-.whatsapp-button:focus {
+.floating-whatsapp-button:hover,
+.floating-whatsapp-button:focus {
   transform: translateY(-2px);
+  box-shadow: 0 22px 45px rgba(37, 211, 102, 0.28);
+}
+
+.floating-whatsapp-button svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+@media (max-width: 640px) {
+  .floating-whatsapp-button {
+    right: 1rem;
+    bottom: 1rem;
+    width: 3.75rem;
+    height: 3.75rem;
+    padding: 0.3rem;
+  }
 }
 
 /* Location */
