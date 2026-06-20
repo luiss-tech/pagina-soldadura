@@ -1,0 +1,469 @@
+/* Global */
+:root {
+  --bg: #0d0d0d;
+  --surface: #161616;
+  --surface-alt: #242424;
+  --text: #f4f4f4;
+  --muted: #bbbbbb;
+  --accent: #ffcc00;
+  --accent-dark: #d4a800;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 18px 45px rgba(0, 0, 0, 0.30);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.nav-toggle {
+  display: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.9rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.will-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(13, 13, 13, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.header-top {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 2.5vw, 2.75rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand p {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+nav a {
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.25s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  color: var(--accent);
+}
+
+/* Hero */
+.hero {
+  min-height: calc(100vh - 90px);
+  display: grid;
+  place-items: center;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(180deg, rgba(13, 13, 13, 1) 0%, rgba(22, 22, 22, 0.95) 100%);
+}
+
+.hero-content {
+  max-width: 760px;
+  text-align: center;
+  animation: fadeUp 0.9s ease both;
+}
+
+.hero-content p:first-of-type {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.92rem;
+}
+
+.hero-content h2 {
+  margin: 1.2rem 0 1rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 0.95;
+}
+
+.hero-content p:last-of-type {
+  margin: 0 auto 2rem;
+  max-width: 620px;
+  color: var(--muted);
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #111;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cta-button:hover,
+.cta-button:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 35px rgba(255, 204, 0, 0.2);
+}
+
+/* Sections */
+section {
+  padding: 4rem 1.5rem;
+}
+
+.section-header {
+  max-width: 780px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+}
+
+.section-header p {
+  margin: 1rem auto 0;
+  color: var(--muted);
+  max-width: 640px;
+}
+
+/* Services */
+.services {
+  background: radial-gradient(circle at top, rgba(255, 204, 0, 0.05), transparent 45%), var(--bg);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.service-grid article {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.service-grid article:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 204, 0, 0.3);
+}
+
+.service-grid h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
+}
+
+.service-grid p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-grid figure {
+  margin: 0;
+  background: var(--surface);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.gallery-grid figure:hover img {
+  transform: scale(1.04);
+}
+
+.gallery-grid figcaption {
+  padding: 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Benefits */
+.benefits {
+  background: var(--surface-alt);
+}
+
+.benefits ul {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.benefits li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.4rem 1.25rem;
+  color: var(--text);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
+}
+
+/* Contact */
+.contact {
+  background: linear-gradient(180deg, rgba(255, 204, 0, 0.08), transparent 60%), var(--bg);
+}
+
+.contact-info {
+  max-width: 1100px;
+  margin: 2rem auto 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.contact-info div {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.contact-info h3 {
+  margin: 0 0 0.75rem;
+}
+
+.contact-info p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 1rem 1.75rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #111;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 18px 35px rgba(37, 211, 102, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.whatsapp-button:hover,
+.whatsapp-button:focus {
+  transform: translateY(-2px);
+}
+
+/* Location */
+.location {
+  padding-bottom: 5rem;
+}
+
+.location-details {
+  max-width: 700px;
+  margin: 1.5rem auto 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow);
+  color: var(--muted);
+}
+
+.location-details p {
+  margin: 0.75rem 0;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Floating WhatsApp button */
+/* Responsive */
+@media (max-width: 960px) {
+  .service-grid,
+  .gallery-grid,
+  .benefits ul,
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+
+  .header-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  nav {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  body.nav-open nav {
+    max-height: 260px;
+  }
+
+  nav ul {
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem 0;
+  }
+
+  nav li {
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+  }
+
+  .hero {
+    min-height: calc(80vh - 80px);
+    padding: 3rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-top {
+    padding: 1rem;
+  }
+
+  .section-header {
+    padding: 0 0.25rem;
+  }
+
+  .hero-content h2 {
+    font-size: 2.4rem;
+  }
+
+  .cta-button {
+    width: 100%;
+  }
+
+  .contact-info {
+    gap: 1rem;
+  }
+
+  .location-details {
+    padding: 1.5rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
