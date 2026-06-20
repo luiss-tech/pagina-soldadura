@@ -1,14 +1,14 @@
 /* Global */
 :root {
-  --bg: #0d0d0d;
-  --surface: #161616;
-  --surface-alt: #242424;
-  --text: #f4f4f4;
-  --muted: #bbbbbb;
-  --accent: #ffcc00;
-  --accent-dark: #d4a800;
+  --bg: #1A1A1A;
+  --surface: #4B5563;
+  --surface-alt: #2F3949;
+  --text: #FFFFFF;
+  --muted: #CBD5E1;
+  --accent: #FBBF24;
+  --accent-dark: #D97706;
   --border: rgba(255, 255, 255, 0.08);
-  --shadow: 0 18px 45px rgba(0, 0, 0, 0.30);
+  --shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
 }
 
 * {
@@ -177,6 +177,11 @@ nav a:focus {
 .cta-button:focus {
   transform: translateY(-2px);
   box-shadow: 0 18px 35px rgba(255, 204, 0, 0.2);
+}
+
+.gallery-actions {
+  text-align: center;
+  margin-top: 2rem;
 }
 
 /* Sections */
