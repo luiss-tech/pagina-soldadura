@@ -1,0 +1,14 @@
+name: Validate static site
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Cyb3r-Jak3/html5validator-action@v0.6.0
+        with:
+          root: .

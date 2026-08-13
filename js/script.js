@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   const header = document.querySelector('header');
   const nav = document.querySelector('nav');
-  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  const navLinks = document.querySelectorAll('nav a');
+  const whatsappUrl = 'https://wa.me/51948406329';
 
   function createMobileMenu() {
     if (!header || !nav) {
@@ -11,22 +12,27 @@ document.addEventListener('DOMContentLoaded', function () {
     const toggle = document.createElement('button');
     toggle.type = 'button';
     toggle.className = 'nav-toggle';
-    toggle.ariaLabel = 'Abrir menú';
-    toggle.innerHTML = '<span>Menú</span>';
+    toggle.setAttribute('aria-label', 'Abrir menú');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-controls', 'primary-navigation');
+    toggle.innerHTML = '<span aria-hidden="true">☰</span> Menú';
+    nav.id = 'primary-navigation';
 
     toggle.addEventListener('click', function () {
       document.body.classList.toggle('nav-open');
       const isOpen = document.body.classList.contains('nav-open');
-      toggle.ariaLabel = isOpen ? 'Cerrar menú' : 'Abrir menú';
+      toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+      toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    header.insertBefore(toggle, nav);
+    nav.parentElement.insertBefore(toggle, nav);
 
     navLinks.forEach((link) => {
       link.addEventListener('click', function () {
         if (document.body.classList.contains('nav-open')) {
           document.body.classList.remove('nav-open');
-          toggle.ariaLabel = 'Abrir menú';
+          toggle.setAttribute('aria-label', 'Abrir menú');
+          toggle.setAttribute('aria-expanded', 'false');
         }
       });
     });
@@ -34,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('click', function (event) {
       if (!header.contains(event.target) && document.body.classList.contains('nav-open')) {
         document.body.classList.remove('nav-open');
-        toggle.ariaLabel = 'Abrir menú';
+        toggle.setAttribute('aria-label', 'Abrir menú');
+        toggle.setAttribute('aria-expanded', 'false');
       }
     });
   }
@@ -42,8 +49,12 @@ document.addEventListener('DOMContentLoaded', function () {
   function bindSmoothScroll() {
     navLinks.forEach((link) => {
       link.addEventListener('click', function (event) {
+        const href = this.getAttribute('href') || '';
+        if (!href.startsWith('#')) {
+          return;
+        }
         event.preventDefault();
-        const targetId = this.getAttribute('href').slice(1);
+        const targetId = href.slice(1);
         const targetElement = document.getElementById(targetId);
 
         if (targetElement) {
@@ -53,7 +64,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function markCurrentPage() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    navLinks.forEach((link) => {
+      const linkPage = (link.getAttribute('href') || '').split('#')[0] || 'index.html';
+      if (linkPage === currentPage) {
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  }
+
+  function addSharedContact() {
+    if (document.querySelector('.floating-whatsapp-button')) {
+      return;
+    }
+
+    const link = document.createElement('a');
+    link.href = whatsappUrl;
+    link.className = 'floating-whatsapp-button';
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.setAttribute('aria-label', 'Solicitar presupuesto por WhatsApp');
+    link.innerHTML = '<span aria-hidden="true">WA</span>';
+    document.body.appendChild(link);
+  }
+
   function revealOnScroll() {
+    if (!('IntersectionObserver' in window)) {
+      return;
+    }
     const observerOptions = {
       threshold: 0.15,
     };
@@ -78,59 +117,55 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function setupContactValidation() {
-    const contactSection = document.querySelector('.contact');
-    if (!contactSection) {
-      return;
-    }
-
-    const form = contactSection.querySelector('form');
+    const form = document.querySelector('#contact-form');
     if (!form) {
       return;
     }
 
-    const emailInput = form.querySelector('input[type="email"]');
-    const phoneInput = form.querySelector('input[type="tel"]');
-    const messageInput = form.querySelector('textarea');
-
     form.addEventListener('submit', function (event) {
-      let valid = true;
-      const errors = [];
-
-      if (emailInput) {
-        const emailValue = emailInput.value.trim();
-        const validEmail = /^\S+@\S+\.\S+$/.test(emailValue);
-        if (!validEmail) {
-          valid = false;
-          errors.push('Por favor ingrese un correo válido.');
-        }
+      event.preventDefault();
+      const data = new FormData(form);
+      const message = [
+        `Hola, soy ${data.get('name')}.`,
+        `Necesito información sobre: ${data.get('service')}.`,
+        `Mi teléfono es ${data.get('phone')}.`,
+        `Detalle: ${data.get('message')}`,
+      ].join('\n');
+      if (!data.get('name') || !data.get('phone') || String(data.get('message')).trim().length < 10) {
+        alert('Completa tu nombre, teléfono y un detalle de al menos 10 caracteres.');
+        return;
       }
-
-      if (phoneInput) {
-        const phoneValue = phoneInput.value.trim();
-        const validPhone = /^\+?\d[\d\s\-]{6,}$/.test(phoneValue);
-        if (!validPhone) {
-          valid = false;
-          errors.push('Por favor ingrese un teléfono válido.');
-        }
-      }
-
-      if (messageInput) {
-        const messageValue = messageInput.value.trim();
-        if (messageValue.length < 10) {
-          valid = false;
-          errors.push('El mensaje debe tener al menos 10 caracteres.');
-        }
-      }
-
-      if (!valid) {
-        event.preventDefault();
-        alert(errors.join('\n'));
-      }
+      window.open(`${whatsappUrl}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
     });
+  }
+
+  function respectReducedMotion() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('reduce-motion');
+    }
+  }
+
+  function addSkipLink() {
+    if (!document.querySelector('.skip-link')) {
+      const skipLink = document.createElement('a');
+      skipLink.href = '#main-content';
+      skipLink.className = 'skip-link';
+      skipLink.textContent = 'Saltar al contenido';
+      document.body.prepend(skipLink);
+    }
+    const main = document.querySelector('main');
+    if (main) {
+      main.id = 'main-content';
+      main.tabIndex = -1;
+    }
   }
 
   createMobileMenu();
   bindSmoothScroll();
+  markCurrentPage();
+  addSharedContact();
   revealOnScroll();
   setupContactValidation();
+  respectReducedMotion();
+  addSkipLink();
 });
