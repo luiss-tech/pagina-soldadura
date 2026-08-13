@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: Cyb3r-Jak3/html5validator-action@v0.6.0
+      - uses: actions/setup-node@v4
         with:
-          root: .
+          node-version: "20"
+      - run: npx --yes html-validate '*.html'
