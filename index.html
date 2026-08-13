@@ -4,8 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0d0d0d">
-  <title>Taller de Soldadura Profesional</title>
-  <meta name="description" content="Taller de soldadura profesional para reparaciones, estructuras metálicas y mantenimiento industrial.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Taller de soldadura en Ferreñafe | SoldaPro</title>
+  <meta name="description" content="Taller de soldadura en Ferreñafe, Lambayeque. Reparaciones, estructuras metálicas y mantenimiento industrial.">
+  <link rel="canonical" href="./">
+  <meta property="og:title" content="Taller de soldadura en Ferreñafe | SoldaPro">
+  <meta property="og:description" content="Soldadura industrial, reparaciones urgentes y estructuras metálicas a medida.">
+  <meta property="og:type" content="business.business">
+  <meta property="og:locale" content="es_PE">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Taller SoldaPro",
+      "description": "Taller de soldadura industrial, reparaciones y estructuras metálicas.",
+      "telephone": "+51 948 406 329",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Augusto B. Leguía 756",
+        "addressLocality": "Ferreñafe",
+        "addressRegion": "Lambayeque",
+        "addressCountry": "PE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -6.6428889,
+        "longitude": -79.7870556
+      },
+      "openingHours": "Mo-Fr 08:00-13:00,15:00-19:00",
+      "areaServed": "Ferreñafe"
+    }
+  </script>
   <link rel="stylesheet" href="css/styles.css?v=2">
   <script defer src="js/script.js"></script>
 </head>
@@ -13,7 +42,7 @@
   <header>
     <div class="header-top">
       <div class="brand">
-        <h1>Taller SoldaPro</h1>
+        <p class="brand-name">Taller SoldaPro</p>
         <p>Soldadura industrial y reparaciones metálicas</p>
       </div>
       <nav aria-label="Menú principal">
@@ -31,7 +60,7 @@
     <section id="inicio" class="hero">
       <div class="hero-content">
         <p>Soldadura de alto impacto con precisión técnica</p>
-        <h2>Profesionalismo y confianza en cada proyecto</h2>
+        <h1>Profesionalismo y confianza en cada proyecto</h1>
         <p>Servicios rápidos y seguros para industria, reparaciones y estructuras metálicas.</p>
         <a href="https://wa.me/51948406329" class="cta-button" target="_blank" rel="noopener">Solicitar presupuesto</a>
       </div>
@@ -65,16 +94,16 @@
       </div>
       <div class="gallery-grid">
         <figure>
-          <img src="assets/images/trabajo-1.jpg" alt="Estructura metálica soldada" loading="lazy">
-          <figcaption>Industrial</figcaption>
+          <img src="assets/images/trabajo-1.svg" alt="Estructura metálica soldada" width="800" height="600" loading="lazy">
+          <figcaption><a href="galeria-industrial.html">Industrial</a></figcaption>
         </figure>
         <figure>
-          <img src="assets/images/trabajo-2.jpg" alt="Reparación de pieza metálica" loading="lazy">
-          <figcaption>Reparaciones</figcaption>
+          <img src="assets/images/trabajo-2.svg" alt="Reparación de pieza metálica" width="800" height="600" loading="lazy">
+          <figcaption><a href="galeria-reparaciones.html">Reparaciones</a></figcaption>
         </figure>
         <figure>
-          <img src="assets/images/trabajo-3.jpg" alt="Soldadura de baranda metálica" loading="lazy">
-          <figcaption>Estructuras</figcaption>
+          <img src="assets/images/trabajo-3.svg" alt="Soldadura de baranda metálica" width="800" height="600" loading="lazy">
+          <figcaption><a href="galeria-estructuras.html">Estructuras</a></figcaption>
         </figure>
       </div>
     </section>
@@ -91,13 +120,41 @@
       </ul>
     </section>
 
+    <section id="contacto" class="contact">
+      <div class="section-header">
+        <h2>Solicita tu presupuesto</h2>
+        <p>Cuéntanos qué necesitas y te responderemos por WhatsApp.</p>
+      </div>
+      <form id="contact-form" class="contact-form">
+        <label>Nombre
+          <input name="name" type="text" autocomplete="name" required>
+        </label>
+        <label>Teléfono
+          <input name="phone" type="tel" autocomplete="tel" required>
+        </label>
+        <label>Servicio
+          <select name="service">
+            <option>Soldadura industrial</option>
+            <option>Reparación urgente</option>
+            <option>Estructura metálica</option>
+            <option>Otro proyecto</option>
+          </select>
+        </label>
+        <label>Cuéntanos sobre tu proyecto
+          <textarea name="message" minlength="10" required></textarea>
+        </label>
+        <button class="cta-button" type="submit">Enviar por WhatsApp</button>
+      </form>
+    </section>
+
     <section id="ubicacion" class="location">
       <div class="section-header">
         <h2>Ubicación</h2>
         <p>Visítanos en nuestro taller y recibe asesoría personalizada.</p>
       </div>
       <div class="location-details">
-        <p>Augusto B. Leguía 756, Ferreñafe</p>
+        <p><strong>Dirección:</strong> Augusto B. Leguía 756, Ferreñafe</p>
+        <p><strong>Teléfono:</strong> <a href="tel:+51948406329">+51&nbsp;948&nbsp;406&nbsp;329</a></p>
         <p>Horario: Lunes a Viernes, 8:00 a.m. - 1:00 p.m. y 3:00 p.m. - 7:00 p.m.</p>
       </div>
       <div class="location-map">
@@ -105,14 +162,14 @@
           src="https://www.google.com/maps?q=-6.6428889,-79.7870556&hl=es&z=16&output=embed"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          aria-label="Mapa de ubicación del taller"
+          title="Mapa de ubicación del Taller SoldaPro"
         ></iframe>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2026 Taller SoldaPro. Todos los derechos reservados.</p>
+    <p>© 2026 Taller SoldaPro. Todos los derechos reservados. <a href="tel:+51948406329">+51&nbsp;948&nbsp;406&nbsp;329</a></p>
   </footer>
   <a href="https://wa.me/51948406329" class="floating-whatsapp-button" target="_blank" rel="noopener" aria-label="Enviar WhatsApp">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
